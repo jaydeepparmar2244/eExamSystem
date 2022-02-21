@@ -4,6 +4,7 @@ const app = express()
 const sessionController = require('./controller/session-controller')
 const roleController = require('./controller/role-controller')
 const userController = require('./controller/user-controller')
+const subjectController = require('./controller/subject-controller')
 const mongoose = require('mongoose');
 
 
@@ -57,6 +58,12 @@ app.get('/users',userController.listAllUser)
 app.delete('/users/:userId',userController.deleteUser)
 app.put('/users',userController.updateUser)
 app.post('/login',userController.login)
+
+//subject
+app.post('/subjects',subjectController.addSubject)
+app.get('/subjects',subjectController.listAllSubject)
+app.put('/subjects',subjectController.updateSubject)
+app.delete('/subjects/:subjectId',subjectController.deleteSubject)
 
 
 app.listen('3000',function(req,res){
