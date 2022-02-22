@@ -6,6 +6,7 @@ const roleController = require('./controller/role-controller')
 const userController = require('./controller/user-controller')
 const subjectController = require('./controller/subject-controller')
 const mongoose = require('mongoose');
+const questionController = require('./controller/question-controller')
 
 
 //middleware
@@ -44,7 +45,6 @@ app.get('/login',sessionController.login)
 // })
 
 app.post('/saveuser',sessionController.saveuser)
-
 //role
 
 app.post('/roles',roleController.addRole)
@@ -64,6 +64,12 @@ app.post('/subjects',subjectController.addSubject)
 app.get('/subjects',subjectController.listAllSubject)
 app.put('/subjects',subjectController.updateSubject)
 app.delete('/subjects/:subjectId',subjectController.deleteSubject)
+
+//question
+app.post('/questions',questionController.addQuestion)
+app.get('/questions',questionController.listAllQuestion)
+app.put('/questions',questionController.updateQuestion)
+app.delete('/questions/:questionId',questionController.deleteQuestion)
 
 
 app.listen('3000',function(req,res){
