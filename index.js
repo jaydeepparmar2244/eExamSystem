@@ -7,6 +7,7 @@ const userController = require('./controller/user-controller')
 const subjectController = require('./controller/subject-controller')
 const mongoose = require('mongoose');
 const questionController = require('./controller/question-controller')
+const examController = require('./controller/exam-controller')
 
 
 //middleware
@@ -71,6 +72,11 @@ app.get('/questions',questionController.listAllQuestion)
 app.put('/questions',questionController.updateQuestion)
 app.delete('/questions/:questionId',questionController.deleteQuestion)
 
+//exam
+app.post('/exams',examController.addExam)
+app.get('/exams',examController.listAllExam)
+app.put('/exams',examController.updateExam)
+app.delete('/exams/:examId',examController.deleteExam)
 
 app.listen('3000',function(req,res){
     console.log('Server Started On 3000 Port!')
