@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const questionController = require('./controller/question-controller')
 const examController = require('./controller/exam-controller')
 const examUserController = require('./controller/examUser-controller')
+const examQuestionController = require('./controller/examQuestion-controller')
 
 //middleware
 app.use(express.json()) //accepts json data from req and set data into body 
@@ -83,6 +84,13 @@ app.post('/examUser',examUserController.addUserToExam)
 app.get('/examUser',examUserController.listAllUsersOfExam)
 app.put('/examUser',examUserController.updateExamUser)
 app.delete('/examUser/:examUserId',examUserController.deleteUserOfExam)
+
+//examQuestion
+app.post('/examQuestion',examQuestionController.addQuestiontoExam)
+app.get('/examQuestion',examQuestionController.listAllQuestionOfExam)
+app.put('/examQuestion',examQuestionController.updateExamQuestion)
+app.delete('/examQuestion/:examQuestionId',examQuestionController.deleteExamQuestion)
+
 
 app.listen('3000',function(req,res){
     console.log('Server Started On 3000 Port!')
