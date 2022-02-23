@@ -10,6 +10,7 @@ const questionController = require('./controller/question-controller')
 const examController = require('./controller/exam-controller')
 const examUserController = require('./controller/examUser-controller')
 const examQuestionController = require('./controller/examQuestion-controller')
+const answerController = require('./controller/answer-controller')
 
 //middleware
 app.use(express.json()) //accepts json data from req and set data into body 
@@ -91,6 +92,10 @@ app.get('/examQuestion',examQuestionController.listAllQuestionOfExam)
 app.put('/examQuestion',examQuestionController.updateExamQuestion)
 app.delete('/examQuestion/:examQuestionId',examQuestionController.deleteExamQuestion)
 
+
+//answers
+app.post('/answers',answerController.addAnswer)
+app.get('/answers',answerController.listAllAnswer)
 
 app.listen('3000',function(req,res){
     console.log('Server Started On 3000 Port!')
