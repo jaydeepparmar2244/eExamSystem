@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 module.exports.addUser = function(req,res){
     let firstName = req.body.firstName
     let lastName = req.body.lastName
+    let gender = req.body.gender
     let email = req.body.email
     let password = req.body.password
     let encPassword = bcrypt.hashSync(password,10)
@@ -11,6 +12,7 @@ module.exports.addUser = function(req,res){
     let user = new UserModel({
         firstName:firstName,
         lastName:lastName,
+        gender:gender,
         email:email,
         password:encPassword,
         role:role
@@ -58,10 +60,9 @@ module.exports.updateUser = function(req,res){
     let email = req.body.email
     let password = req.body.password
     let encPassword =bcrypt.hashSync(password,10)
-    let role = req.body.role
     UserModel.updateOne(
         {_id:userId},
-        {firstName:firstName,lastName:lastName,email:email,password:encPassword,role:role},
+        {firstName:firstName,lastName:lastName,email:email,password:encPassword},
         function(err,data){
             if(err){
                 console.log(err)
@@ -72,7 +73,6 @@ module.exports.updateUser = function(req,res){
             }
         })
 }
-
 module.exports.login = function(req,res){
     let isCorrect = false
     let param_email = req.body.email

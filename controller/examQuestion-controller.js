@@ -18,7 +18,7 @@ module.exports.addQuestiontoExam = function(req,res){
 }
 
 module.exports.listAllQuestionOfExam = function(req,res){
-    ExamQuestionModel.find().populate('exam').populate('question').exec(function(err,data){
+    ExamQuestionModel.find().populate({path:'exam',populate:{path:'subject'}}).populate('question').exec(function(err,data){
         if(err){
             res.json({msg:"SMW",status:-1,data:err})
         }

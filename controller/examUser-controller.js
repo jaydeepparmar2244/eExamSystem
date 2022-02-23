@@ -18,7 +18,7 @@ module.exports.addUserToExam = function(req,res){
 }
 
 module.exports.listAllUsersOfExam = function(req,res){
-    ExamUserModel.find().populate('exam').populate('user').exec(function(err,data){
+    ExamUserModel.find().populate({path:'exam',populate:{path:'subject'}}).populate('user').exec(function(err,data){
         if(err){
             res.json({msg:"Something Wrong!",status:-1,data:err})
         }
