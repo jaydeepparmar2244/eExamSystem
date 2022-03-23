@@ -25,6 +25,18 @@ module.exports.addQuestion = function(req,res){
     })
 }
 
+module.exports.listOneQuestion = function(req,res){
+    let questionId = req.params.questionId
+    QuestionModel.findById(questionId,function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:req.body})
+        }
+        else{
+            res.json({msg:"One Question...",status:200,data:data})
+        }
+    })
+}
+
 module.exports.listAllQuestion = function(req,res){
     QuestionModel.find(function(err,data){
         if(err){
@@ -37,15 +49,14 @@ module.exports.listAllQuestion = function(req,res){
 }
 
 module.exports.updateQuestion = function(req,res){
-    let questionId = req.body.questionId
+    let questionId = req.params.questionId
     let questionName = req.body.questionName
     let option1 = req.body.option1
     let option2 = req.body.option2
     let option3 = req.body.option3
     let option4 = req.body.option4
     let answer = req.body.answer
-    QuestionModel.updateOne({_id:questionId},
-        {questionName:questionName,option1:option1,option2:option2,option3:option3,option4:option4,answer:answer},
+    QuestionModel.findByIdAndUpdate(questionId,{questionName:questionName,option1:option1,option2:option2,option3:option3,option4:option4,answer:answer},
         function(err,data){
             if(err){
                 res.json({msg:"Something Wrong!",status:-1,data:req.body})

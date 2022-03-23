@@ -32,21 +32,32 @@ module.exports.listAllExam = function(req,res){
     })
 }
 
+module.exports.listOneExam = function(req,res){
+    let examId = req.params.examId
+    ExamModel.findById(examId,function(err,data){
+        if(err){
+            res.json({msg:"SMW",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"One Exam",status:200,data:data})
+        }
+    })
+}
+
 module.exports.updateExam = function(req,res){
-    let examId = req.body.examId
+    let examId = req.params.examId
     let examName = req.body.examName
     let totalQuestions = req.body.totalQuestions
     let isActive = req.body.isActive
-    let role = req.body.role
-    ExamModel.updateOne({_id:examId},{examName:examName,totalQuestions:totalQuestions,isActive:isActive,role:role},
-        function(err,data){
-            if(err){
-                res.json({msg:"Something Wrong!",status:-1,data:req.body})
-            }
-            else{
-                res.json({msg:"Exam Added!",status:200,data:data})
-            }
-        })
+    let subject = req.body.subject
+    ExamModel.findByIdAndUpdate(examId,{examName:examName,totalQuestions:totalQuestions,isActive:isActive,subject:subject},function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:req.body})
+        }
+        else{
+            res.json({msg:"Exam Updated",status:200,data:data})
+        }
+    })
 }
 
 module.exports.deleteExam = function(req,res){

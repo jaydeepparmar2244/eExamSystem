@@ -28,3 +28,15 @@ module.exports.listAllAnswer = function(req,res){
         }
     })
 }
+
+module.exports.listOneAnswer = function(req,res){
+    let answerId = req.params.answerId
+    AnswerModel.findById(answerId).populate('question').exec(function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:req.body})
+        }
+        else{
+            res.json({msg:"One Answer...",status:200,data:data})
+        }
+    })
+}

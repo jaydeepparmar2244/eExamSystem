@@ -31,10 +31,23 @@ module.exports.listAllResult = function(req,res){
     })
 }
 
+module.exports.listOneResult = function(req,res){
+    let resultId = req.params.resultId
+    ResultModel.findById(resultId).populate('exam').populate('user').exec(function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:req.body})
+        }
+        else{
+            res.json({msg:"One Result...",status:200,data:data})
+        }
+    })
+}
+
 module.exports.updateResult = function(req,res){
-    let resultId = req.body.resultId
+    let resultId = req.params.resultId
     let marks = req.body.marks
-    ResultModel.updateOne({_id:resultId,marks:marks},function(err,data){
+    ResultModel.findByIdAndUpdate(resultId,{marks:marks},
+        function(err,data){
         if(err){
             res.json({msg:"sww",status:-1,data:err})
         }

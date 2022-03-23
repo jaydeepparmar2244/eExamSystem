@@ -12,10 +12,12 @@ const examUserController = require('./controller/examUser-controller')
 const examQuestionController = require('./controller/examQuestion-controller')
 const answerController = require('./controller/answer-controller')
 const resultController = require('./controller/result-controller')
+const cors = require('cors')
 
 //middleware
 app.use(express.json()) //accepts json data from req and set data into body 
 app.use(express.urlencoded({extended:true})) // web--> accept url encoded data from request and set data into body
+app.use(cors())
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/eExam',function(err){
@@ -59,26 +61,31 @@ app.put('/roles',roleController.updateRole)
 //user
 app.post('/users',userController.addUser)
 app.get('/users',userController.listAllUser)
+app.get('/users/:userId',userController.listOneUser)
 app.delete('/users/:userId',userController.deleteUser)
-app.put('/users',userController.updateUser)
+app.put('/users/:userId',userController.updateUser)
 app.post('/login',userController.login)
+
 
 //subject
 app.post('/subjects',subjectController.addSubject)
 app.get('/subjects',subjectController.listAllSubject)
-app.put('/subjects',subjectController.updateSubject)
+app.get('/subjects/:subjectId',subjectController.listOneSubject)
+app.put('/subjects/:subjectId',subjectController.updateSubject)
 app.delete('/subjects/:subjectId',subjectController.deleteSubject)
 
 //question
 app.post('/questions',questionController.addQuestion)
 app.get('/questions',questionController.listAllQuestion)
-app.put('/questions',questionController.updateQuestion)
+app.get('/questions/:questionId',questionController.listOneQuestion)
+app.put('/questions/:questionId',questionController.updateQuestion)
 app.delete('/questions/:questionId',questionController.deleteQuestion)
 
 //exam
 app.post('/exams',examController.addExam)
 app.get('/exams',examController.listAllExam)
-app.put('/exams',examController.updateExam)
+app.get('/exams/:examId',examController.listOneExam)
+app.put('/exams/:examId',examController.updateExam)
 app.delete('/exams/:examId',examController.deleteExam)
 
 //examUser
@@ -97,13 +104,15 @@ app.delete('/examQuestion/:examQuestionId',examQuestionController.deleteExamQues
 //answers
 app.post('/answers',answerController.addAnswer)
 app.get('/answers',answerController.listAllAnswer)
+app.get('/answers/:answerId',answerController.listOneAnswer)
 
 //results
 app.post('/results',resultController.addResult)
+app.put('/results/:resultId',resultController.updateResult)
+app.get('/results/:resultId',resultController.listOneResult)
 app.get('/results',resultController.listAllResult)
-app.put('/results',resultController.updateResult)
 app.delete('/results/:resultId',resultController.deleteResult)
 
-app.listen('3000',function(req,res){
-    console.log('Server Started On 3000 Port!')
+app.listen('8080',function(req,res){
+    console.log('Server Started On 8080 Port!')
 })

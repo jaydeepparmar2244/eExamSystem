@@ -19,6 +19,18 @@ module.exports.addSubject = function(req,res){
     })
 }
 
+module.exports.listOneSubject = function(req,res){
+    let subjectId = req.params.subjectId
+    SubjectModel.findById(subjectId,function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:req.body})
+        }
+        else{
+            res.json({msg:"One Subject...",status:200,data:data})
+        }
+    })
+}
+
 module.exports.listAllSubject = function(req,res){
     SubjectModel.find(function(err,data){
         if(err){
@@ -31,12 +43,10 @@ module.exports.listAllSubject = function(req,res){
 }
 
 module.exports.updateSubject = function(req,res){
-    let subjectId = req.body.subjectId
+    let subjectId = req.params.subjectId
     let subjectName = req.body.subjectName
     let subjectDescription = req.body.subjectDescription
-    SubjectModel.updateOne(
-        {_id:subjectId},
-        {subjectName:subjectName,subjectDescription:subjectDescription},
+    SubjectModel.findByIdAndUpdate(subjectId,{subjectName:subjectName,subjectDescription:subjectDescription},
         function(err,data){
             if(err){
                 res.json({msg:"Something Wrong!",status:-1,data:req.body})
