@@ -13,7 +13,13 @@ let ExamSchema = mongoose.Schema({
     subject:{
         type:mongoose.Types.ObjectId,
         ref:"subjects"
-    }
+    },
+    questions:[
+        {
+            type:mongoose.Types.ObjectId,
+            ref:"questions"
+        }
+    ]
 })
 
 let ExamModel = mongoose.model('exams',ExamSchema)

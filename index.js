@@ -43,7 +43,7 @@ app.get('/',function(req,res){
 // })
 
 app.get('/signup',sessionController.signup)
-app.get('/login',sessionController.login)
+// app.get('/login',sessionController.login)
 
 // app.get('/login',function(req,res){
 //     res.write('Login')
@@ -75,7 +75,8 @@ app.put('/subjects/:subjectId',subjectController.updateSubject)
 app.delete('/subjects/:subjectId',subjectController.deleteSubject)
 
 //question
-app.post('/questions',questionController.addQuestion)
+// app.post('/questions',questionController.addQuestion)
+app.post('/exams/:examId/questions',questionController.addQuestiontoExam)
 app.get('/questions',questionController.listAllQuestion)
 app.get('/questions/:questionId',questionController.listOneQuestion)
 app.put('/questions/:questionId',questionController.updateQuestion)

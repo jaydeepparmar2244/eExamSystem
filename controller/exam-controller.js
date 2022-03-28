@@ -34,7 +34,7 @@ module.exports.listAllExam = function(req,res){
 
 module.exports.listOneExam = function(req,res){
     let examId = req.params.examId
-    ExamModel.findById(examId,function(err,data){
+    ExamModel.findById(examId).populate('subject').populate('questions').exec(function(err,data){
         if(err){
             res.json({msg:"SMW",status:-1,data:err})
         }
