@@ -77,10 +77,10 @@ app.delete('/subjects/:subjectId',subjectController.deleteSubject)
 //question
 // app.post('/questions',questionController.addQuestion)
 app.post('/exams/:examId/questions',questionController.addQuestiontoExam)
-app.get('/questions',questionController.listAllQuestion)
-app.get('/questions/:questionId',questionController.listOneQuestion)
-app.put('/questions/:questionId',questionController.updateQuestion)
-app.delete('/questions/:questionId',questionController.deleteQuestion)
+app.get('/exams/:examId/questions',questionController.listAllQuestionsOfExam)
+app.get('/exams/:examId/questions/:questionId',questionController.listOneQuestion)
+app.put('/exams/:examId/questions/:questionId',questionController.updateQuestion)
+app.delete('/exams/:examId/questions/:questionId',questionController.deleteQuestion)
 
 //exam
 app.post('/exams',examController.addExam)

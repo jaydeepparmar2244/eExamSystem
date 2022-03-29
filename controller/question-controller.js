@@ -51,6 +51,7 @@ module.exports.addQuestiontoExam = function(req,res){
 };
 
 module.exports.listOneQuestion = function(req,res){
+    // let examId = req.params.examId
     let questionId = req.params.questionId
     QuestionModel.findById(questionId,function(err,data){
         if(err){
@@ -62,8 +63,9 @@ module.exports.listOneQuestion = function(req,res){
     })
 }
 
-module.exports.listAllQuestion = function(req,res){
-    QuestionModel.find(function(err,data){
+module.exports.listAllQuestionsOfExam = function(req,res){
+    var examId = req.params.examId
+    ExamModel.findById(examId,function(err,data){
         if(err){
             res.json({msg:"Something Wrong!",status:-1,data:err})
         }
@@ -92,9 +94,11 @@ module.exports.updateQuestion = function(req,res){
         })
 }
 
-module.exports.deleteQuestion = function(req,res){
+module.exports.deleteQuestion = async function(req,res){
+    let examId = req.params.examId
     let questionId = req.params.questionId
-    QuestionModel.deleteOne({"_id":questionId},function(err,data){
+    await ExamModel.findByIdAndUpdate(examId,{$pull:{questions:questionId}})
+    await QuestionModel.findByIdAndDelete({"_id":questionId},function(err,data){
         if(err){
             res.json({msg:"Something Went Wrong!",status:-1,data:err})
         }
