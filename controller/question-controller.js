@@ -41,10 +41,10 @@ module.exports.addQuestiontoExam = function(req,res){
     });
     exam.findOneAndUpdate({_id:examId},{$push:{questions:question}},function(err,data){
         if(err){
-            console.log(err)
+            res.json({msg:"Something Went Wrong!",status:-1,data:data})
         }
         else{
-            console.log(data)
+            res.json({msg:"Exams of subject",status:200,data:data})
         }
     })
     question.save();

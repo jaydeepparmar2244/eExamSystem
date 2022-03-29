@@ -73,7 +73,7 @@ app.get('/subjects',subjectController.listAllSubject)
 app.get('/subjects/:subjectId',subjectController.listOneSubject)
 app.put('/subjects/:subjectId',subjectController.updateSubject)
 app.delete('/subjects/:subjectId',subjectController.deleteSubject)
-
+app.get('/subjects/:subjectId/exams',examController.listAllExamsOfSubject)
 //question
 // app.post('/questions',questionController.addQuestion)
 app.post('/exams/:examId/questions',questionController.addQuestiontoExam)

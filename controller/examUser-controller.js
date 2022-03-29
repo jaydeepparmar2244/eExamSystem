@@ -1,3 +1,4 @@
+const ExamModel = require('../model/exam-model')
 const ExamUserModel = require('../model/examUser-model')
 
 module.exports.addUserToExam = function(req,res){

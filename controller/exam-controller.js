@@ -1,4 +1,5 @@
 const ExamModel = require('../model/exam-model')
+const SubjectModel = require('../model/subject-model')
 
 module.exports.addExam = function(req,res){
     let examName = req.body.examName
@@ -68,6 +69,19 @@ module.exports.deleteExam = function(req,res){
         }
         else{
             res.json({msg:"Exam Deleted!",status:200,data:data})
+        }
+    })
+}
+
+module.exports.listAllExamsOfSubject = function(req,res){
+    let subjectId = req.params.subjectId
+    let subject = SubjectModel.findById(subjectId)
+    ExamModel.find({subject:{_id:subjectId}},function(err,data){
+        if(err){
+            res.json({msg:"Something Went Wrong!",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"Exams of Subject",status:200,data:data})
         }
     })
 }
