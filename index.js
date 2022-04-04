@@ -42,7 +42,10 @@ app.get('/',function(req,res){
 //     res.end()
 // })
 
+
 app.get('/signup',sessionController.signup)
+app.post('/forgotPassword',sessionController.mailLinkToResetPassword)
+app.post('/reset',sessionController.resetPassword)
 // app.get('/login',sessionController.login)
 
 // app.get('/login',function(req,res){
