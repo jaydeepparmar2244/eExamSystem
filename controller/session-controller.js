@@ -65,6 +65,7 @@ module.exports.mailLinkToResetPassword = function (req, res) {
                         console.log(err);
                     } else {
                         console.log('Email sent: ' + data.response);
+                        res.json({msg:"Email Sent!",status:200,data:data})
                     }
                 });
             }
@@ -81,6 +82,9 @@ module.exports.resetPassword = function(req,res){
     UserModel.findOneAndUpdate({email:email},{password:hashPassword},function(err,data){
         if(err){
             res.json({msg:"Error",status:-1,data:err})
+        }
+        else if(data==null){
+            res.json({msg:"Email Not FOund!",status:-1,data:data})
         }
         else{
             res.json({msg:"Password Reset!",status:200,data:data})
