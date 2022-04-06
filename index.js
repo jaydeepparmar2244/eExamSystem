@@ -86,6 +86,7 @@ app.put('/exams/:examId/questions/:questionId',questionController.updateQuestion
 app.delete('/exams/:examId/questions/:questionId',questionController.deleteQuestion)
 
 //exam
+app.get('/exams/search',examController.searchExams)
 app.post('/exams',examController.addExam)
 app.get('/exams',examController.listAllExam)
 app.get('/exams/:examId',examController.listOneExam)

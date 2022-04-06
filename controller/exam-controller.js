@@ -85,3 +85,15 @@ module.exports.listAllExamsOfSubject = function(req,res){
         }
     })
 }
+
+module.exports.searchExams = function(req,res){
+    let examName = req.query.examName
+    ExamModel.findOne({examName:examName},function(err,data){
+        if(err){
+            res.json({msg:"Not Found!",status:-1,data:data})
+        }
+        else{
+            res.json({msg:"Exam Found!",status:200,data:data})
+        }
+    })
+}
