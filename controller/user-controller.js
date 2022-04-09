@@ -42,7 +42,7 @@ module.exports.listAllUser = function(req,res){
 
 module.exports.listOneUser = function(req,res){
     let userId = req.params.userId
-    UserModel.findById(userId,function(err,data){
+    UserModel.findById(userId).populate('role').exec(function(err,data){
         if(err){
             res.json({msg:"SWW",status:-1,data:err})
         }
