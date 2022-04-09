@@ -3,6 +3,7 @@ const SubjectModel = require('../model/subject-model')
 
 module.exports.addExam = function(req,res){
     let examName = req.body.examName
+    let author = req.body.author
     let totalQuestions = req.body.totalQuestions
     let isActive = req.body.isActive
     let subject = req.body.subject
@@ -10,7 +11,8 @@ module.exports.addExam = function(req,res){
         examName:examName,
         totalQuestions:totalQuestions,
         isActive:isActive,
-        subject:subject
+        subject:subject,
+        author:author
     })
     exam.save(function(err,data){
         if(err){
@@ -23,7 +25,7 @@ module.exports.addExam = function(req,res){
 }
 
 module.exports.listAllExam = function(req,res){
-    ExamModel.find().populate('subject').exec(function(err,data){
+    ExamModel.find().populate('subject').populate('author').exec(function(err,data){
         if(err){
             res.json({msg:"Something Wrong!",status:-1,data:err})
         }
@@ -35,7 +37,7 @@ module.exports.listAllExam = function(req,res){
 
 module.exports.listOneExam = function(req,res){
     let examId = req.params.examId
-    ExamModel.findById(examId).populate('subject').populate('questions').exec(function(err,data){
+    ExamModel.findById(examId).populate('subject').populate('author').populate('questions').exec(function(err,data){
         if(err){
             res.json({msg:"SMW",status:-1,data:err})
         }

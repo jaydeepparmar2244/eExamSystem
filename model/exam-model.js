@@ -14,6 +14,10 @@ let ExamSchema = mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:"subjects"
     },
+    author:{
+        type:mongoose.Types.ObjectId,
+        ref:"users"
+    },
     questions:[
         {
             type:mongoose.Types.ObjectId,
