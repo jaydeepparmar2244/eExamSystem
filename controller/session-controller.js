@@ -50,12 +50,12 @@ module.exports.mailLinkToResetPassword = function (req, res) {
                     port: 465,
                     secure: true,
                     auth: {
-                        user: 'jaydeep2244.67@gmail.com',
-                        pass: 'JDparmar@2244'
+                        user: process.env.EMAIL_ID,
+                        pass: process.env.EMAIL_PASS
                     }
                 });
                 var mailOptions = {
-                    from: 'jaydeep2244.67@gmail.com',
+                    from: process.env.EMAIL_ID,
                     to: data.email,
                     subject: 'Link to reset Password!',
                     text: "click on this link to reset your password:"+`http://localhost:3000/reset/${token}`

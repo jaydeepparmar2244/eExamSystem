@@ -1,6 +1,7 @@
 const express = require('express')
 // const path = require('path')
 const app = express()
+const dotenv = require('dotenv').config()
 const sessionController = require('./controller/session-controller')
 const roleController = require('./controller/role-controller')
 const userController = require('./controller/user-controller')
@@ -118,6 +119,6 @@ app.get('/results/:resultId',resultController.listOneResult)
 app.get('/results',resultController.listAllResult)
 app.delete('/results/:resultId',resultController.deleteResult)
 
-app.listen('8080',function(req,res){
+app.listen(process.env.PORT,function(req,res){
     console.log('Server Started On 8080 Port!')
 })
