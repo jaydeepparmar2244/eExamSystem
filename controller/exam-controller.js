@@ -4,6 +4,7 @@ const SubjectModel = require('../model/subject-model')
 module.exports.addExam = function(req,res){
     let examName = req.body.examName
     let author = req.body.author
+    let totalMarks = req.body.totalMarks
     let totalQuestions = req.body.totalQuestions
     let isActive = req.body.isActive
     let subject = req.body.subject
@@ -11,6 +12,7 @@ module.exports.addExam = function(req,res){
         examName:examName,
         totalQuestions:totalQuestions,
         isActive:isActive,
+        totalMarks:totalMarks,
         subject:subject,
         author:author
     })
@@ -50,10 +52,11 @@ module.exports.listOneExam = function(req,res){
 module.exports.updateExam = function(req,res){
     let examId = req.params.examId
     let examName = req.body.examName
+    let totalMarks =  req.body.totalMarks
     let totalQuestions = req.body.totalQuestions
     let isActive = req.body.isActive
     let subject = req.body.subject
-    ExamModel.findByIdAndUpdate(examId,{examName:examName,totalQuestions:totalQuestions,isActive:isActive,subject:subject},function(err,data){
+    ExamModel.findByIdAndUpdate(examId,{examName:examName,totalQuestions:totalQuestions,totalMarks:totalMarks,isActive:isActive,subject:subject},function(err,data){
         if(err){
             res.json({msg:"SWW",status:-1,data:req.body})
         }

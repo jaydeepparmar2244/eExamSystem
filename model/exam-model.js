@@ -10,6 +10,9 @@ let ExamSchema = mongoose.Schema({
     isActive:{
         type:Boolean
     },
+    totalMarks:{
+        type:Number
+    },
     subject:{
         type:mongoose.Types.ObjectId,
         ref:"subjects"
