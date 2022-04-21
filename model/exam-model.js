@@ -13,6 +13,9 @@ let ExamSchema = mongoose.Schema({
     totalMarks:{
         type:Number
     },
+    examTime:{
+        type:Number
+    },
     subject:{
         type:mongoose.Types.ObjectId,
         ref:"subjects"

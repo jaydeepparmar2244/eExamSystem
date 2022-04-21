@@ -9,8 +9,6 @@ const subjectController = require('./controller/subject-controller')
 const mongoose = require('mongoose');
 const questionController = require('./controller/question-controller')
 const examController = require('./controller/exam-controller')
-const examUserController = require('./controller/examUser-controller')
-const examQuestionController = require('./controller/examQuestion-controller')
 const answerController = require('./controller/answer-controller')
 const resultController = require('./controller/result-controller')
 const cors = require('cors')
@@ -93,19 +91,6 @@ app.get('/exams',examController.listAllExam)
 app.get('/exams/:examId',examController.listOneExam)
 app.put('/exams/:examId',examController.updateExam)
 app.delete('/exams/:examId',examController.deleteExam)
-
-//examUser
-app.post('/examUser',examUserController.addUserToExam)
-app.get('/examUser',examUserController.listAllUsersOfExam)
-app.put('/examUser',examUserController.updateExamUser)
-app.delete('/examUser/:examUserId',examUserController.deleteUserOfExam)
-
-//examQuestion
-app.post('/examQuestion',examQuestionController.addQuestiontoExam)
-app.get('/examQuestion',examQuestionController.listAllQuestionOfExam)
-app.put('/examQuestion',examQuestionController.updateExamQuestion)
-app.delete('/examQuestion/:examQuestionId',examQuestionController.deleteExamQuestion)
-
 
 //answers
 app.post('/answers',answerController.addAnswer)
