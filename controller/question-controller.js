@@ -37,7 +37,8 @@ module.exports.addQuestiontoExam = function(req,res){
         option2:req.body.option2,
         option3:req.body.option3,
         option4:req.body.option4,
-        answer:req.body.answer
+        answer:req.body.answer,
+        marks:req.body.marks
     });
     exam.findOneAndUpdate({_id:examId},{$push:{questions:question}},function(err,data){
         if(err){
@@ -83,7 +84,8 @@ module.exports.updateQuestion = function(req,res){
     let option3 = req.body.option3
     let option4 = req.body.option4
     let answer = req.body.answer
-    QuestionModel.findByIdAndUpdate(questionId,{questionName:questionName,option1:option1,option2:option2,option3:option3,option4:option4,answer:answer},
+    let marks = req.body.marks
+    QuestionModel.findByIdAndUpdate(questionId,{questionName:questionName,option1:option1,option2:option2,option3:option3,option4:option4,answer:answer,marks:marks},
         function(err,data){
             if(err){
                 res.json({msg:"Something Wrong!",status:-1,data:req.body})

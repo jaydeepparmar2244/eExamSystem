@@ -19,6 +19,10 @@ let QuestionSchema = mongoose.Schema({
     answer:{
         type:String,
         required:true
+    },
+    marks:{
+        type:Number,
+        required:true
     }
 })
 
