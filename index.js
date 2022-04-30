@@ -29,11 +29,6 @@ mongoose.connect('mongodb://localhost:27017/eExam',function(err){
     }
 });
 
-app.get('/',function(req,res){
-    res.write('Hello!')
-    // res.write('Hey')
-    res.end()
-})
 
 // app.get('/signup',function(req,res){
 //     // res.write('Helooooooooo')

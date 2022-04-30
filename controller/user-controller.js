@@ -1,7 +1,7 @@
 const UserModel = require('../model/user-model')
 const bcrypt = require('bcrypt') 
 
-module.exports.addUser = function(req,res){
+module.exports.addUser = async function(req,res){
     let firstName = req.body.firstName
     let lastName = req.body.lastName
     let gender = req.body.gender
@@ -15,9 +15,10 @@ module.exports.addUser = function(req,res){
         gender:gender,
         email:email,
         password:encPassword,
-        role:role
+        role:role,
     })
-    user.save(function(err,data){
+    await user.populate('role');
+    await user.save(function(err,data){
         if(err){
             console.log(err)
             res.json({msg:"Something Went Wrong!",status:-1,data:req.body})
@@ -26,6 +27,7 @@ module.exports.addUser = function(req,res){
             res.json({msg:"User Added!",status:200,data:data})
         }
     })
+
 }
 
 module.exports.listAllUser = function(req,res){
