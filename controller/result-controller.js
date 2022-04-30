@@ -1,3 +1,4 @@
+const { path } = require('express/lib/application')
 const ResultModel = require('../model/result-model')
 
 module.exports.addResult = function(req,res){
@@ -41,6 +42,19 @@ module.exports.listOneResult = function(req,res){
             res.json({msg:"One Result...",status:200,data:data})
         }
     })
+}
+
+
+module.exports.listAllResultsOfUser = function(req,res){
+    let userId = req.params.userId
+    ResultModel.find({user:userId}).populate({path:'exam',populate:{path:'subject',model:'subjects'}}).populate({path:'user',populate:{path:'role',model:"roles"}}).exec(function(err,data){
+        if(err){
+            res.json({msg:"Something Went Wrong!",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"All Results of a User...",status:200,data:data})
+        }
+    }) 
 }
 
 module.exports.updateResult = function(req,res){

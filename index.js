@@ -100,9 +100,10 @@ app.get('/answers/:answerId',answerController.listOneAnswer)
 //results
 app.post('/results',resultController.addResult)
 app.put('/results/:resultId',resultController.updateResult)
-app.get('/results/:resultId',resultController.listOneResult)
+app.get('/result/:resultId',resultController.listOneResult)
 app.get('/results',resultController.listAllResult)
 app.delete('/results/:resultId',resultController.deleteResult)
+app.get('/results/:userId',resultController.listAllResultsOfUser)
 
 app.listen(process.env.PORT,function(req,res){
     console.log('Server Started On 8080 Port!')
