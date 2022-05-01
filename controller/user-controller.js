@@ -24,7 +24,7 @@ module.exports.addUser = async function(req,res){
             res.json({msg:"Something Went Wrong!",status:-1,data:req.body})
         }
         else{
-            res.json({msg:"User Added!",status:200,data:data})
+            res.json({msg:"Signed Up!",status:200,data:data})
         }
     })
 
@@ -98,7 +98,6 @@ module.exports.login = function(req,res){
              isCorrect = true
          }
       }   
-     
       if(isCorrect == false){
          res.json({msg:"Invalid Credentials!",status:-1,data:req.body})
       }
