@@ -105,3 +105,15 @@ module.exports.searchExams = function(req,res){
         }
     })
 }
+
+module.exports.listExamsofAuthor = function(req,res){
+    let userId = req.params.userId
+    ExamModel.find({author:{_id:userId}}).populate('subject').populate('questions').exec(function(err,data){
+        if(err){
+            res.json({msg:"Error",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"Exams of author",status:200,data:data})
+        }
+    })
+}

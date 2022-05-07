@@ -62,7 +62,7 @@ app.get('/users/:userId',userController.listOneUser)
 app.delete('/users/:userId',userController.deleteUser)
 app.put('/users/:userId',userController.updateUser)
 app.post('/login',userController.login)
-
+app.get('/user/:userId/exams',examController.listExamsofAuthor)
 
 //subject
 app.post('/subjects',subjectController.addSubject)
