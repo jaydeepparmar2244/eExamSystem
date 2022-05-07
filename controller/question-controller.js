@@ -31,6 +31,8 @@ const ExamModel = require('../model/exam-model')
 module.exports.addQuestiontoExam = function(req,res){
     var examId = req.params.examId
     var exam = ExamModel.findById(req.params.examId);
+    // var totalQuestionsRemaining = 
+    // console.log(totalQuestionsAdded);
     var question = new QuestionModel({
         questionName:req.body.questionName,
         option1:req.body.option1,
@@ -45,7 +47,7 @@ module.exports.addQuestiontoExam = function(req,res){
             res.json({msg:"Something Went Wrong!",status:-1,data:data})
         }
         else{
-            res.json({msg:"Exams of subject",status:200,data:data})
+                res.json({msg:"Question Added to exam",status:200,data:data})
         }
     })
     question.save();
@@ -100,12 +102,9 @@ module.exports.deleteQuestion = async function(req,res){
     let examId = req.params.examId
     let questionId = req.params.questionId
     await ExamModel.findByIdAndUpdate(examId,{$pull:{questions:questionId}})
-    await QuestionModel.findByIdAndDelete({"_id":questionId},function(err,data){
-        if(err){
+    QuestionModel.findByIdAndDelete({"_id":questionId}).then((err)=>{
             res.json({msg:"Something Went Wrong!",status:-1,data:err})
-        }
-        else{
-            res.json({msg:"Question Deleted!",status:200,data:data})
-        }
+    }).catch((data)=>{
+        res.json({msg:"Question Deleted!",status:200,data:data})
     })
 }
