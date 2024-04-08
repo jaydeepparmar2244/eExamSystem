@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true})) // web--> accept url encoded data f
 app.use(cors())
 
 //database connection
-mongoose.connect('mongodb+srv://jaydeep224467:JDparmar@2244@eexam.3qlb6zp.mongodb.net/?retryWrites=true&w=majority&appName=eExam',function(err){
+mongoose.connect('mongodb+srv://jaydeep224467:JDparmar%402244@eexam.3qlb6zp.mongodb.net/?retryWrites=true&w=majority&appName=eExam',function(err){
     if(err){
         console.log("Database not Connected!")
         console.log(err)
